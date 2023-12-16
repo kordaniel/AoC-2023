@@ -13,6 +13,40 @@ CARTESIAN_DIRECTIONS = {
 }
 
 
+class Vec2D:
+
+    def __init__(self, y: int, x: int):
+        self.__coords = (y, x)
+
+
+    @property
+    def y(self) -> int:
+        return self.__coords[0]
+
+    @property
+    def x(self) -> int:
+        return self.__coords[1]
+
+    def get_coords(self) -> Tuple[int, int]:
+        return self.__coords
+
+    def get_opposite(self) -> 'Vec2D':
+        return Vec2D(-self.y, -self.x)
+
+    def __hash__(self) -> int:
+        return hash(self.__coords)
+
+    def __eq__(self, other) -> bool:
+        return self.y == other.y and self.x == other.x
+
+    def __add__(self, other):
+        return Vec2D(self.y + other.y, self.x + other.x)
+
+    def __str__(self) -> str:
+        return f'({self.y}, {self.x})'
+
+
+
 def filemap(fname: str, func: Callable[[str], Any] = str, sep: str ='\n') -> List[Any]:
     with open(fname, 'r') as f:
         return list(map(func, f.read().strip().split(sep)))
