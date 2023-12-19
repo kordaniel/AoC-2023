@@ -31,11 +31,12 @@ def run_beam(grid: List[str], pos: Tuple[int, int], dir: Tuple[int, int]):
 
     energized_tiles.add(pos)
     visited.add((pos, dir))
+
     if len(energized_tiles) == len(grid) * len(grid[pos[0]]):
         return # All tiles visited
 
     tile = grid[pos[0]][pos[1]]
-    
+
     if tile == '.':
         next_pos = pos[0] + dir[0], pos[1] + dir[1]
         next_dir = dir
